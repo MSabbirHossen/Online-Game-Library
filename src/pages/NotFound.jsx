@@ -1,90 +1,84 @@
 import React from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import { FaHome, FaGamepad } from "react-icons/fa";
+import { FaHome, FaGamepad, FaSkull } from "react-icons/fa";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen bg-dark flex items-center justify-center px-4">
+    <section className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden px-4">
+
+      {/* background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
+
+      {/* glow orbs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/10 blur-[120px]"></div>
+      <div className="absolute bottom-10 right-10 w-72 h-72 bg-blue-500/10 blur-[120px]"></div>
+
+      {/* grid */}
+      <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+
+      {/* content */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
-        className="text-center"
+        className="relative z-10 text-center max-w-2xl"
       >
-        {/* Animated 404 */}
+
+        {/* icon */}
+        <motion.div
+          animate={{ rotate: [0, 10, -10, 0] }}
+          transition={{ duration: 4, repeat: Infinity }}
+          className="mb-6"
+        >
+          <FaSkull className="text-cyan-400 text-6xl mx-auto drop-shadow-lg" />
+        </motion.div>
+
+        {/* 404 */}
         <motion.h1
-          initial={{ y: -50 }}
+          initial={{ y: -20 }}
           animate={{ y: 0 }}
-          transition={{ type: "spring", stiffness: 100 }}
-          className="text-9xl md:text-[10rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-4"
+          className="text-8xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-4"
         >
           404
         </motion.h1>
 
-        {/* Message */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Page Not Found
-          </h2>
-          <p className="text-xl text-gray-400 mb-8 max-w-md mx-auto">
-            Oops! It seems like this page doesn't exist. Maybe you took a wrong
-            turn in the gaming world?
-          </p>
-        </motion.div>
+        {/* title */}
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          Lost in the <span className="text-cyan-400">Game Grid</span>
+        </h2>
 
-        {/* Animated Icon */}
-        <motion.div
-          animate={{
-            rotate: [0, 10, -10, 0],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-          }}
-          className="mb-12"
-        >
-          <FaGamepad className="text-6xl text-primary mx-auto" />
-        </motion.div>
+        {/* description */}
+        <p className="text-gray-400 text-lg mb-10">
+          The page you are looking for doesn’t exist or has been moved into the
+          digital void.
+        </p>
 
-        {/* Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="flex flex-col md:flex-row gap-4 justify-center"
-        >
+        {/* buttons */}
+        <div className="flex flex-col md:flex-row gap-4 justify-center">
+
           <Link
             to="/"
-            className="btn btn-primary btn-lg text-white hover:scale-105 transition flex items-center gap-2"
+            className="px-8 py-3 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition flex items-center justify-center gap-2"
           >
-            <FaHome />
-            Go Home
+            <FaHome /> Return Home
           </Link>
+
           <Link
             to="/explore"
-            className="btn btn-outline btn-lg border-accent text-accent hover:bg-accent hover:text-dark flex items-center gap-2"
+            className="px-8 py-3 rounded-lg border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black transition flex items-center justify-center gap-2"
           >
-            <FaGamepad />
-            Explore Games
+            <FaGamepad /> Explore Games
           </Link>
-        </motion.div>
+        </div>
 
-        {/* Extra Message */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="text-gray-500 mt-12"
-        >
-          Error Code: 404 | Lost in the Game Library
-        </motion.p>
+        {/* footer note */}
+        <p className="text-gray-500 text-sm mt-12">
+          Error Code: 404 • Neural Link Lost
+        </p>
+
       </motion.div>
-    </div>
+    </section>
   );
 };
 

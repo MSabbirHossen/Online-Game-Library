@@ -4,11 +4,12 @@ import { useAuth } from "../context/AuthContext";
 import { updateProfile } from "firebase/auth";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import { FaArrowLeft, FaUser, FaImage } from "react-icons/fa";
+import { FaArrowLeft, FaUser, FaImage, FaEdit } from "react-icons/fa";
 
 const UpdateProfile = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+
   const [name, setName] = useState(user?.displayName || "");
   const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
   const [loading, setLoading] = useState(false);
@@ -17,7 +18,7 @@ const UpdateProfile = () => {
     e.preventDefault();
 
     if (!name.trim()) {
-      toast.error("Please enter your name");
+      toast.error("Name is required");
       return;
     }
 
@@ -26,145 +27,115 @@ const UpdateProfile = () => {
     try {
       await updateProfile(user, {
         displayName: name,
-        photoURL: photoURL,
+        photoURL,
       });
-      toast.success("Profile updated successfully!");
+
+      toast.success("Profile updated successfully");
       navigate("/my-profile");
-    } catch (error) {
-      toast.error("Error updating profile: " + error.message);
+    } catch (err) {
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-dark py-12 px-4">
-      <div className="max-w-2xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+    <section className="relative min-h-screen flex items-center justify-center bg-gray-900 py-16 overflow-hidden">
+
+      {/* background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
+
+      {/* glow */}
+      <div className="absolute top-10 left-10 w-72 h-72 bg-cyan-500/10 blur-[120px]"></div>
+      <div className="absolute bottom-10 right-10 w-72 h-72 bg-blue-500/10 blur-[120px]"></div>
+
+      {/* grid */}
+      <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+
+      {/* container */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative z-10 w-full max-w-xl p-8 rounded-2xl bg-black/40 border border-gray-700 backdrop-blur-md shadow-lg shadow-cyan-500/10"
+      >
+
+        {/* back */}
+        <button
+          onClick={() => navigate("/my-profile")}
+          className="text-cyan-400 hover:text-cyan-300 flex items-center gap-2 mb-6"
         >
-          {/* Back Button */}
-          <button
-            onClick={() => navigate("/my-profile")}
-            className="flex items-center gap-2 text-accent hover:text-primary transition mb-6"
-          >
-            <FaArrowLeft />
-            Back to Profile
-          </button>
+          <FaArrowLeft /> Back to Profile
+        </button>
 
-          {/* Update Form Card */}
-          <div className="card bg-base-200 shadow-2xl shadow-primary shadow-opacity-50">
-            <div className="card-body">
-              <h1 className="text-3xl font-bold text-white mb-2">
-                Update Profile
-              </h1>
-              <p className="text-gray-400 mb-6">
-                Update your name and profile picture
-              </p>
+        {/* header */}
+        <div className="text-center mb-8">
+          <FaEdit className="text-cyan-400 text-3xl mx-auto mb-3" />
+          <h1 className="text-3xl font-black text-white">
+            Update <span className="text-cyan-400">Profile</span>
+          </h1>
+          <p className="text-gray-400 text-sm mt-2">
+            Modify your identity settings
+          </p>
+        </div>
 
-              {/* Current Photo Preview */}
-              {photoURL && (
-                <div className="flex justify-center mb-6">
-                  <div className="avatar">
-                    <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img src={photoURL} alt={name} />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <form onSubmit={handleUpdateProfile} className="space-y-4">
-                {/* Name Input */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-white font-bold flex items-center gap-2">
-                      <FaUser className="text-primary" />
-                      Full Name
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Enter your full name"
-                    className="input input-bordered w-full bg-gray-800 text-white border-gray-600 focus:border-primary"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-
-                {/* Photo URL Input */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-white font-bold flex items-center gap-2">
-                      <FaImage className="text-primary" />
-                      Photo URL
-                    </span>
-                  </label>
-                  <input
-                    type="url"
-                    placeholder="https://example.com/photo.jpg"
-                    className="input input-bordered w-full bg-gray-800 text-white border-gray-600 focus:border-primary"
-                    value={photoURL}
-                    onChange={(e) => setPhotoURL(e.target.value)}
-                  />
-                  <label className="label">
-                    <span className="label-text-alt text-gray-400">
-                      Enter a direct link to an image (JPG, PNG, etc.)
-                    </span>
-                  </label>
-                </div>
-
-                {/* Update Button */}
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="btn btn-primary w-full text-white font-bold"
-                >
-                  {loading ? "Updating..." : "Update Information"}
-                </button>
-
-                {/* Cancel Button */}
-                <button
-                  type="button"
-                  onClick={() => navigate("/my-profile")}
-                  className="btn btn-outline w-full text-gray-400 hover:text-white"
-                >
-                  Cancel
-                </button>
-              </form>
+        {/* preview avatar */}
+        {photoURL && (
+          <div className="flex justify-center mb-8">
+            <div className="w-24 h-24 rounded-full border-2 border-cyan-400 overflow-hidden shadow-lg shadow-cyan-500/20">
+              <img src={photoURL} alt="preview" />
             </div>
           </div>
+        )}
 
-          {/* Tips */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mt-8 bg-base-200 rounded-lg p-6"
+        {/* form */}
+        <form onSubmit={handleUpdateProfile} className="space-y-5">
+
+          {/* name */}
+          <div className="p-4 rounded-xl bg-black/30 border border-gray-700">
+            <label className="text-gray-400 text-sm flex items-center gap-2 mb-2">
+              <FaUser className="text-cyan-400" /> Full Name
+            </label>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter your name"
+              className="w-full bg-transparent text-white outline-none"
+            />
+          </div>
+
+          {/* photo */}
+          <div className="p-4 rounded-xl bg-black/30 border border-gray-700">
+            <label className="text-gray-400 text-sm flex items-center gap-2 mb-2">
+              <FaImage className="text-cyan-400" /> Photo URL
+            </label>
+            <input
+              value={photoURL}
+              onChange={(e) => setPhotoURL(e.target.value)}
+              placeholder="https://image-url.com"
+              className="w-full bg-transparent text-white outline-none"
+            />
+          </div>
+
+          {/* update */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
           >
-            <h3 className="text-lg font-bold text-white mb-4">Tips</h3>
-            <ul className="space-y-2 text-gray-400">
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                <span>
-                  Use a clear, recognizable photo for your profile picture
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                <span>Photo URL must be a direct link to an image file</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                <span>Recommended image size: at least 200x200 pixels</span>
-              </li>
-            </ul>
-          </motion.div>
-        </motion.div>
-      </div>
-    </div>
+            {loading ? "Updating..." : "Update Profile"}
+          </button>
+
+          {/* cancel */}
+          <button
+            type="button"
+            onClick={() => navigate("/my-profile")}
+            className="w-full py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-cyan-400 hover:text-cyan-400 transition"
+          >
+            Cancel
+          </button>
+        </form>
+      </motion.div>
+    </section>
   );
 };
 

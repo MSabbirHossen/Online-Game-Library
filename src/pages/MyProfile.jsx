@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { motion } from "framer-motion";
-import { FaUser, FaEnvelope, FaEdit, FaSignOutAlt } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaEdit, FaSignOutAlt, FaShieldAlt } from "react-icons/fa";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase.config";
 import { toast } from "react-toastify";
@@ -17,150 +17,116 @@ const MyProfile = () => {
       toast.success("Logged out successfully");
       navigate("/");
     } catch (error) {
-      toast.error("Error logging out: " + error.message);
+      toast.error(error.message);
     }
   };
 
   return (
-    <div className="min-h-screen bg-dark py-12 px-4">
-      <div className="max-w-2xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Profile Card */}
-          <div className="card bg-gradient-to-br from-base-200 to-base-300 shadow-2xl shadow-primary shadow-opacity-50">
-            <div className="card-body">
-              <h1 className="text-4xl font-bold text-white text-center mb-8">
-                My Profile
-              </h1>
+    <section className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden py-16">
 
-              {/* Profile Picture */}
-              <div className="flex justify-center mb-8">
-                <div className="avatar placeholder">
-                  <div className="bg-primary text-white rounded-full w-32">
-                    {user?.photoURL ? (
-                      <img src={user.photoURL} alt={user.displayName} />
-                    ) : (
-                      <span className="text-4xl">
-                        {user?.displayName?.charAt(0) || "U"}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
+      {/* background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
 
-              {/* User Info */}
-              <div className="space-y-6">
-                {/* Name */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-white font-bold flex items-center gap-2">
-                      <FaUser className="text-primary" />
-                      Full Name
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    value={user?.displayName || "Not set"}
-                    disabled
-                    className="input input-bordered bg-base-100 text-white border-gray-600"
-                  />
-                </div>
+      {/* glow */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-cyan-500/10 blur-[120px]"></div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-500/10 blur-[120px]"></div>
 
-                {/* Email */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-white font-bold flex items-center gap-2">
-                      <FaEnvelope className="text-primary" />
-                      Email Address
-                    </span>
-                  </label>
-                  <input
-                    type="email"
-                    value={user?.email || "Not set"}
-                    disabled
-                    className="input input-bordered bg-base-100 text-white border-gray-600"
-                  />
-                </div>
+      {/* grid */}
+      <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
-                {/* Member Since */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-white font-bold">
-                      Member Since
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    value={
-                      user?.metadata?.creationTime
-                        ? new Date(
-                            user.metadata.creationTime,
-                          ).toLocaleDateString()
-                        : "Unknown"
-                    }
-                    disabled
-                    className="input input-bordered bg-base-100 text-white border-gray-600"
-                  />
-                </div>
+      {/* card */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative z-10 w-full max-w-2xl p-8 rounded-2xl bg-black/40 border border-gray-700 backdrop-blur-md shadow-lg shadow-cyan-500/10"
+      >
 
-                {/* Action Buttons */}
-                <div className="divider text-gray-400"></div>
+        {/* header */}
+        <div className="text-center mb-8">
+          <FaShieldAlt className="text-cyan-400 text-3xl mx-auto mb-3" />
 
-                <div className="flex flex-col gap-3">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => navigate("/update-profile")}
-                    className="btn btn-primary text-white font-bold flex items-center gap-2"
-                  >
-                    <FaEdit />
-                    Edit Profile
-                  </motion.button>
+          <h1 className="text-4xl font-black text-white">
+            My <span className="text-cyan-400">Profile</span>
+          </h1>
 
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={handleLogout}
-                    className="btn btn-outline btn-error text-error hover:bg-error hover:text-white font-bold flex items-center gap-2"
-                  >
-                    <FaSignOutAlt />
-                    Logout
-                  </motion.button>
-                </div>
-              </div>
-            </div>
+          <p className="text-gray-400 text-sm mt-2">
+            Secure identity dashboard
+          </p>
+        </div>
+
+        {/* avatar */}
+        <div className="flex justify-center mb-8">
+          <div className="w-28 h-28 rounded-full border-2 border-cyan-400 overflow-hidden bg-black/30 flex items-center justify-center text-cyan-400 text-3xl font-bold shadow-lg shadow-cyan-500/20">
+            {user?.photoURL ? (
+              <img src={user.photoURL} alt="profile" />
+            ) : (
+              user?.displayName?.charAt(0) || "U"
+            )}
+          </div>
+        </div>
+
+        {/* info */}
+        <div className="space-y-5">
+
+          <ProfileField icon={<FaUser />} label="Full Name" value={user?.displayName || "Not set"} />
+          <ProfileField icon={<FaEnvelope />} label="Email" value={user?.email || "Not set"} />
+
+          <div className="p-4 rounded-xl bg-black/30 border border-gray-700">
+            <p className="text-gray-400 text-sm">Member Since</p>
+            <p className="text-white font-semibold mt-1">
+              {user?.metadata?.creationTime
+                ? new Date(user.metadata.creationTime).toLocaleDateString()
+                : "Unknown"}
+            </p>
+          </div>
+        </div>
+
+        {/* actions */}
+        <div className="mt-8 space-y-3">
+
+          <button
+            onClick={() => navigate("/update-profile")}
+            className="w-full py-3 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition flex items-center justify-center gap-2"
+          >
+            <FaEdit /> Edit Profile
+          </button>
+
+          <button
+            onClick={handleLogout}
+            className="w-full py-3 rounded-lg border border-red-500 text-red-400 hover:bg-red-500/10 transition flex items-center justify-center gap-2"
+          >
+            <FaSignOutAlt /> Logout
+          </button>
+        </div>
+
+        {/* footer stats */}
+        <div className="mt-10 grid grid-cols-2 gap-4">
+
+          <div className="p-4 rounded-xl bg-black/30 border border-gray-700 text-center">
+            <p className="text-cyan-400 font-bold">Active</p>
+            <p className="text-gray-400 text-sm">Account Status</p>
           </div>
 
-          {/* Additional Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mt-8 bg-base-200 rounded-lg p-6"
-          >
-            <h3 className="text-xl font-bold text-white mb-4">
-              Account Overview
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="stat bg-base-100 rounded-lg">
-                <div className="stat-title text-gray-400">Account Status</div>
-                <div className="stat-value text-primary text-2xl">Active</div>
-                <div className="stat-desc text-success">Verified</div>
-              </div>
-              <div className="stat bg-base-100 rounded-lg">
-                <div className="stat-title text-gray-400">Last Login</div>
-                <div className="stat-value text-accent text-2xl">Today</div>
-                <div className="stat-desc">Just now</div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </div>
+          <div className="p-4 rounded-xl bg-black/30 border border-gray-700 text-center">
+            <p className="text-cyan-400 font-bold">Verified</p>
+            <p className="text-gray-400 text-sm">Security Level</p>
+          </div>
+
+        </div>
+      </motion.div>
+    </section>
   );
 };
+
+/* reusable field */
+const ProfileField = ({ icon, label, value }) => (
+  <div className="flex items-center gap-3 p-4 rounded-xl bg-black/30 border border-gray-700">
+    <span className="text-cyan-400">{icon}</span>
+    <div>
+      <p className="text-gray-400 text-sm">{label}</p>
+      <p className="text-white font-semibold">{value}</p>
+    </div>
+  </div>
+);
 
 export default MyProfile;

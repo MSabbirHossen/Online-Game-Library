@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router";
 import { FaArrowRight } from "react-icons/fa";
 
-
 const Banner = () => {
   return (
     <section className="relative h-[90vh] md:h-screen overflow-hidden bg-gray-900">
@@ -34,8 +33,10 @@ const Banner = () => {
           className="max-w-3xl"
         >
           {/* Heading */}
+          <p className="text-lg md:text-2xl font-bold text-gray-300 mb-4">
+            Welcome to the
+          </p>
           <h1 className="text-4xl md:text-6xl font-black mb-6 text-white leading-tight">
-            Welcome to <br />
             <span className="text-cyan-400">Online Game Library</span>
           </h1>
 

@@ -21,19 +21,18 @@ const Register = () => {
   const navigate = useNavigate();
 
   const validatePassword = (pwd) => {
-    const hasUppercase = /[A-Z]/.test(pwd);
-    const hasLowercase = /[a-z]/.test(pwd);
-    const hasMinLength = pwd.length >= 6;
-    return hasUppercase && hasLowercase && hasMinLength;
+    return (
+      /[A-Z]/.test(pwd) &&
+      /[a-z]/.test(pwd) &&
+      pwd.length >= 6
+    );
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     if (!validatePassword(password)) {
-      toast.error(
-        "Password must have: Uppercase letter, lowercase letter, and at least 6 characters",
-      );
+      toast.error("Password must include uppercase, lowercase, and 6+ chars");
       return;
     }
 
@@ -48,12 +47,14 @@ const Register = () => {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password,
+        password
       );
+
       await updateProfile(userCredential.user, {
         displayName: name,
-        photoURL: photoURL,
+        photoURL,
       });
+
       toast.success("Account created successfully!");
       navigate("/");
     } catch (error) {
@@ -78,167 +79,93 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-dark flex items-center justify-center px-4 py-8">
+    <section className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
+
+      {/* background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
+
+      {/* glow */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-cyan-500/10 blur-[120px]"></div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-500/10 blur-[120px]"></div>
+
+      {/* grid */}
+      <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+
+      {/* form card */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md"
+        className="relative z-10 w-full max-w-md p-8 rounded-2xl bg-black/40 border border-gray-700 backdrop-blur-md shadow-lg shadow-cyan-500/10"
       >
-        <div className="card bg-base-200 shadow-2xl shadow-primary shadow-opacity-50">
-          <div className="card-body">
-            <h1 className="text-3xl font-bold text-white text-center mb-2">
-              Join Gamehub
-            </h1>
-            <p className="text-gray-400 text-center mb-6">
-              Create your account and start gaming
-            </p>
 
-            <form onSubmit={handleRegister} className="space-y-4">
-              {/* Name Input */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-white">Full Name</span>
-                </label>
-                <div className="input-group">
-                  <span className="bg-primary text-dark">
-                    <FaUser />
-                  </span>
-                  <input
-                    type="text"
-                    placeholder="John Doe"
-                    className="input input-bordered w-full bg-gray-800 text-white border-gray-600 focus:border-primary"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
+        {/* title */}
+        <h1 className="text-3xl font-black text-white text-center">
+          Join{" "}
+          <span className="text-cyan-400">GameHub</span>
+        </h1>
 
-              {/* Email Input */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-white">Email</span>
-                </label>
-                <div className="input-group">
-                  <span className="bg-primary text-dark">
-                    <FaEnvelope />
-                  </span>
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    className="input input-bordered w-full bg-gray-800 text-white border-gray-600 focus:border-primary"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
+        <p className="text-gray-400 text-center mt-2 mb-8">
+          Create your gaming identity
+        </p>
 
-              {/* Photo URL Input */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-white">Photo URL</span>
-                </label>
-                <div className="input-group">
-                  <span className="bg-primary text-dark">
-                    <FaImage />
-                  </span>
-                  <input
-                    type="url"
-                    placeholder="https://example.com/photo.jpg"
-                    className="input input-bordered w-full bg-gray-800 text-white border-gray-600 focus:border-primary"
-                    value={photoURL}
-                    onChange={(e) => setPhotoURL(e.target.value)}
-                  />
-                </div>
-              </div>
+        {/* form */}
+        <form onSubmit={handleRegister} className="space-y-4">
 
-              {/* Password Input */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-white">Password</span>
-                </label>
-                <div className="input-group">
-                  <span className="bg-primary text-dark">
-                    <FaLock />
-                  </span>
-                  <input
-                    type="password"
-                    placeholder="••••••••"
-                    className="input input-bordered w-full bg-gray-800 text-white border-gray-600 focus:border-primary"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-                <label className="label">
-                  <span className="label-text-alt text-gray-400">
-                    Must have uppercase, lowercase, and 6+ characters
-                  </span>
-                </label>
-              </div>
+          <Input icon={<FaUser />} value={name} setValue={setName} placeholder="Full Name" />
+          <Input icon={<FaEnvelope />} value={email} setValue={setEmail} placeholder="Email" type="email" />
+          <Input icon={<FaImage />} value={photoURL} setValue={setPhotoURL} placeholder="Photo URL (optional)" type="url" />
+          <Input icon={<FaLock />} value={password} setValue={setPassword} placeholder="Password" type="password" />
+          <Input icon={<FaLock />} value={confirmPassword} setValue={setConfirmPassword} placeholder="Confirm Password" type="password" />
 
-              {/* Confirm Password Input */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-white">
-                    Confirm Password
-                  </span>
-                </label>
-                <div className="input-group">
-                  <span className="bg-primary text-dark">
-                    <FaLock />
-                  </span>
-                  <input
-                    type="password"
-                    placeholder="••••••••"
-                    className="input input-bordered w-full bg-gray-800 text-white border-gray-600 focus:border-primary"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition hover:scale-[1.02] shadow-lg shadow-cyan-500/20"
+          >
+            {loading ? "Creating account..." : "Create Account"}
+          </button>
+        </form>
 
-              {/* Register Button */}
-              <button
-                type="submit"
-                disabled={loading}
-                className="btn btn-primary w-full text-white font-bold"
-              >
-                {loading ? "Creating account..." : "Create Account"}
-              </button>
-            </form>
-
-            {/* Divider */}
-            <div className="divider text-gray-400">OR</div>
-
-            {/* Google Register */}
-            <button
-              onClick={handleGoogleRegister}
-              disabled={loading}
-              className="btn btn-outline btn-primary w-full text-primary hover:bg-primary hover:text-dark"
-            >
-              <FaGoogle />
-              Register with Google
-            </button>
-
-            {/* Login Link */}
-            <p className="text-center text-gray-400 mt-4">
-              Already have an account?{" "}
-              <Link
-                to="/login"
-                className="text-primary hover:underline font-bold"
-              >
-                Log in
-              </Link>
-            </p>
-          </div>
+        {/* divider */}
+        <div className="my-6 text-center text-gray-500 text-sm">
+          OR
         </div>
+
+        {/* google */}
+        <button
+          onClick={handleGoogleRegister}
+          disabled={loading}
+          className="w-full py-3 rounded-lg border border-gray-700 text-gray-300 hover:border-cyan-400 hover:text-cyan-300 transition flex items-center justify-center gap-2"
+        >
+          <FaGoogle />
+          Continue with Google
+        </button>
+
+        {/* login */}
+        <p className="text-center text-gray-500 mt-6 text-sm">
+          Already have an account?{" "}
+          <Link to="/login" className="text-cyan-400 font-semibold hover:text-cyan-300">
+            Login
+          </Link>
+        </p>
       </motion.div>
-    </div>
+    </section>
   );
 };
+
+/* reusable input */
+const Input = ({ icon, value, setValue, placeholder, type = "text" }) => (
+  <div className="flex items-center bg-black/30 border border-gray-700 rounded-lg focus-within:border-cyan-400 transition">
+    <span className="px-3 text-cyan-400">{icon}</span>
+    <input
+      type={type}
+      placeholder={placeholder}
+      className="w-full py-3 bg-transparent text-gray-200 placeholder-gray-500 focus:outline-none"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      required={type !== "url"}
+    />
+  </div>
+);
 
 export default Register;

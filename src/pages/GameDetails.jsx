@@ -41,7 +41,6 @@ const GameDetails = () => {
 
   return (
     <section className="relative min-h-screen py-16 overflow-hidden bg-gray-900">
-
       {/* background */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
 
@@ -53,7 +52,6 @@ const GameDetails = () => {
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4">
-
         {/* Back */}
         <motion.button
           initial={{ opacity: 0, x: -20 }}
@@ -66,7 +64,6 @@ const GameDetails = () => {
 
         {/* Main */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-
           {/* LEFT */}
           <div>
             <motion.img
@@ -88,7 +85,6 @@ const GameDetails = () => {
 
           {/* RIGHT */}
           <div className="lg:col-span-2">
-
             {/* title */}
             <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
               {game.title}
@@ -115,12 +111,18 @@ const GameDetails = () => {
 
             {/* specs */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-              <Spec icon={<FaUser />} label="Developer" value={game.developer} />
-              <Spec icon={<FaCalendar />} label="Release" value={new Date(game.releaseDate).toLocaleDateString()} />
+              <Spec
+                icon={<FaUser />}
+                label="Developer"
+                value={game.developer}
+              />
+              <Spec
+                icon={<FaCalendar />}
+                label="Release"
+                value={new Date(game.releaseDate).toLocaleDateString()}
+              />
               <Spec icon={<FaHdd />} label="File Size" value={game.fileSize} />
               <Spec icon={<FaGlobe />} label="Language" value={game.language} />
-
             </div>
 
             {/* system requirements */}
@@ -130,15 +132,12 @@ const GameDetails = () => {
               </h3>
               <p className="text-gray-400">{game.systemRequirements}</p>
             </div>
-
           </div>
         </div>
 
         {/* Related */}
         <div className="mt-20">
-          <h2 className="text-2xl font-bold text-white mb-6">
-            Similar Games
-          </h2>
+          <h2 className="text-2xl font-bold text-white mb-6">Similar Games</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {gamesData
@@ -153,6 +152,7 @@ const GameDetails = () => {
                 >
                   <img
                     src={related.coverPhoto}
+                    alt={`${related.title} cover art`}
                     className="h-40 w-full object-cover"
                   />
 
@@ -160,15 +160,6 @@ const GameDetails = () => {
                     <h3 className="text-white font-semibold truncate">
                       {related.title}
                     </h3>
-
-                    <div className="flex justify-between mt-3 text-sm">
-                      <span className="text-cyan-400">
-                        {related.category}
-                      </span>
-                      <span className="text-gray-400">
-                        ⭐ {related.ratings}
-                      </span>
-                    </div>
                   </div>
                 </motion.div>
               ))}
