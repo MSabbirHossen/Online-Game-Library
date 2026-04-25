@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 
 
-const CtA = () => {
+const CTA = () => {
   return (
     <div>
       <motion.div
@@ -31,4 +31,4 @@ const CtA = () => {
   );
 };
 
-export default CtA;
+export default CTA;

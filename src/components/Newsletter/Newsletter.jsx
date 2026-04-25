@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-
+import { FaBell, FaEnvelope } from "react-icons/fa";
 
 const Newsletter = () => {
+  const [email, setEmail] = useState("");
+
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
     if (email) {
@@ -49,7 +51,7 @@ const Newsletter = () => {
           </div>
           <button
             type="submit"
-            className="btn btn-secondary text-white font-bold hover:bg-opacity-80 transition"
+            className="btn btn-neutral text-white font-bold hover:bg-opacity-80 transition"
           >
             Subscribe
           </button>
