@@ -9,144 +9,137 @@ import { toast } from "react-toastify";
 const Navbar = () => {
   const { user, isLoggedIn } = useAuth();
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
       toast.success("Logged out successfully");
       navigate("/");
-      setIsMenuOpen(false);
+      setOpen(false);
     } catch (error) {
-      toast.error("Error logging out: " + error.message);
+      toast.error(error.message);
     }
   };
 
   return (
-    <nav className="navbar bg-neutral-content shadow-xl sticky top-0 z-50">
-      <div className="navbar-start">
-        <NavLink
-          to="/"
-          className="flex items-center gap-2 text-xl font-bold text-primary hover:text-black transition"
-        >
-          <FaGamepad size={28} />
-          <span className="hidden sm:inline">GameHub</span>
-        </NavLink>
-      </div>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
 
-      <div className="navbar-center hidden lg:flex">
-        <div className="menu menu-horizontal px-1 gap-2">
+      {/* glow line */}
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-cyan-500/30"></div>
+
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+
+        {/* Logo */}
+        <NavLink to="/" className="flex items-center gap-2 group">
+          <FaGamepad className="text-cyan-400 text-2xl group-hover:scale-110 transition" />
+          <span className="text-xl font-black text-white">
+            Game<span className="text-cyan-400">Hub</span>
+          </span>
+        </NavLink>
+
+        {/* Desktop menu */}
+        <div className="hidden md:flex items-center gap-6">
+
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `btn btn-ghost text-base-content hover:outline-1 hover:text-black transition ${
-                isActive ? "bg-primary text-white" : ""
+              `text-sm font-semibold transition ${
+                isActive
+                  ? "text-cyan-400"
+                  : "text-gray-300 hover:text-cyan-300"
               }`
             }
           >
             Home
           </NavLink>
+
           <NavLink
             to="/explore"
             className={({ isActive }) =>
-              `btn btn-ghost text-base-content hover:outline-1 hover:text-black transition ${
-                isActive ? "bg-primary text-white" : ""
+              `text-sm font-semibold transition ${
+                isActive
+                  ? "text-cyan-400"
+                  : "text-gray-300 hover:text-cyan-300"
               }`
             }
           >
             Explore
           </NavLink>
         </div>
-      </div>
 
-      <div className="navbar-end gap-2">
-        {isLoggedIn ? (
-          <div className="dropdown dropdown-end">
-            <button
-              className="btn btn-circle btn-ghost avatar"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <div className="w-10 rounded-full bg-primary flex items-center justify-center">
+        {/* Right side */}
+        <div className="flex items-center gap-3">
+
+          {/* Auth */}
+          {isLoggedIn ? (
+            <div className="relative">
+
+              {/* avatar */}
+              <button
+                onClick={() => setOpen(!open)}
+                className="w-10 h-10 rounded-full bg-black/40 border border-gray-700 flex items-center justify-center hover:border-cyan-400 transition overflow-hidden"
+              >
                 {user?.photoURL ? (
-                  <img src={user.photoURL} alt={user.displayName} />
+                  <img src={user.photoURL} alt="user" />
                 ) : (
-                  <FaUser className="text-white" />
+                  <FaUser className="text-cyan-400" />
                 )}
-              </div>
-            </button>
-            {isMenuOpen && (
-              <ul className="dropdown-content menu bg-white rounded-box z-[1] w-52 p-2 shadow">
-                <li className="text-base-content mb-2">
-                  <span>{user?.displayName || user?.email}</span>
-                </li>
-                <li>
+              </button>
+
+              {/* dropdown */}
+              {open && (
+                <div className="absolute right-0 mt-3 w-56 bg-gray-900 border border-gray-700 rounded-xl shadow-lg overflow-hidden">
+
+                  <div className="px-4 py-3 border-b border-gray-700 text-sm text-gray-300">
+                    {user?.displayName || user?.email}
+                  </div>
+
                   <NavLink
                     to="/my-profile"
-                    className="text-base-content hover:outline-1 hover:text-black transition w-full text-left"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center gap-2 px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-cyan-300"
                   >
-                    <FaUser /> My Profile
+                    <FaUser /> Profile
                   </NavLink>
-                </li>
-                <li>
+
                   <button
                     onClick={handleLogout}
-                    className="text-base-content hover:bg-red-600 hover:text-white hover:outline-1 transition w-full text-left"
+                    className="flex items-center gap-2 w-full px-4 py-3 text-sm text-red-400 hover:bg-red-500/10"
                   >
                     <FaSignOutAlt /> Logout
                   </button>
-                </li>
-              </ul>
-            )}
-          </div>
-        ) : (
-          <div className="gap-2 flex">
-            <NavLink to="/login" className={({ isActive }) =>
-              `btn bg-neutral-content text-base-content hover:outline-1 hover:text-black transition ${
-                isActive ? "bg-primary text-white" : ""
-              }`
-            }>
-              Login
-            </NavLink>
-            <NavLink
-              to="/register"
-              className={({ isActive }) =>
-              `btn bg-neutral-content text-base-content hover:outline-1 hover:text-black transition ${
-                isActive ? "bg-primary text-white" : ""
-              }`
-            }
-            >
-              Register
-            </NavLink>
-            
-          </div>
-        )}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="flex gap-2">
 
-        {/* Mobile menu */}
-        <div className="dropdown dropdown-end lg:hidden">
-          <button className="btn btn-ghost">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
+              <NavLink
+                to="/login"
+                className="px-4 py-2 text-sm rounded-lg border border-gray-700 text-gray-300 hover:border-cyan-400 hover:text-cyan-300 transition"
+              >
+                Login
+              </NavLink>
+
+              <NavLink
+                to="/register"
+                className="px-4 py-2 text-sm rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
+              >
+                Register
+              </NavLink>
+
+            </div>
+          )}
+
+          {/* mobile */}
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden text-gray-300"
+          >
+            ☰
           </button>
-          <ul className="dropdown-content menu bg-neutral-content rounded-box z-[1] w-52 p-2 shadow text-base-content">
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/explore">Explore</NavLink>
-            </li>
-          </ul>
+
         </div>
       </div>
     </nav>

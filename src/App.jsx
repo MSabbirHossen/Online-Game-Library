@@ -14,6 +14,7 @@ import UpdateProfile from "./pages/UpdateProfile";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ExploreGames from "./pages/ExploreGames";
+import PopularGames from "./components/PopularGames/PopularGames";
 
 function AppContent() {
   const location = useLocation();
@@ -74,6 +75,8 @@ function AppContent() {
             </ProtectedRoute>
           }
         />
+        {/* <Route path="/popular" element={<PopularGames />} /> */}
+
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

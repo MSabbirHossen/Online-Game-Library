@@ -1,49 +1,65 @@
 import React from "react";
 import { Link } from "react-router";
-import { FaStar, FaDownload } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const GameCard = ({ game }) => {
   return (
     <motion.div
-      whileHover={{ y: -5 }}
+      whileHover={{ y: -6 }}
       transition={{ duration: 0.3 }}
-      className="card bg-base-200 shadow-xl overflow-hidden hover:shadow-2xl hover:shadow-primary transition-all duration-300"
+      className="group relative rounded-xl overflow-hidden bg-black/40 border border-gray-700/40 backdrop-blur-md shadow-lg hover:shadow-cyan-500/20 transition-all duration-300"
     >
       <Link to={`/game/${game.id}`}>
-        <figure className="relative overflow-hidden h-48">
+
+        {/* Image */}
+        <figure className="relative h-48 overflow-hidden">
           <img
             src={game.coverPhoto}
             alt={game.title}
-            className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
-          <div className="absolute top-2 right-2 bg-primary px-3 py-1 rounded-full text-white text-sm font-bold">
+
+          {/* category badge */}
+          <div className="absolute top-3 right-3 bg-cyan-500/90 text-black px-3 py-1 rounded-full text-xs font-bold shadow-md">
             {game.category}
           </div>
+
+          {/* overlay glow */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
         </figure>
 
-        <div className="card-body p-4">
-          <h2 className="card-title text-black text-lg truncate">
+        {/* Content */}
+        <div className="p-4">
+
+          {/* title */}
+          <h2 className="text-lg font-bold text-white truncate group-hover:text-cyan-300 transition">
             {game.title}
           </h2>
 
-          <p className="text-gray-600 text-sm line-clamp-2">
+          {/* description */}
+          <p className="text-gray-400 text-sm mt-2 line-clamp-2">
             {game.description}
           </p>
 
-          <div className="flex items-center justify-between my-2">
-            <div className="flex items-center gap-1 text-accent">
+          {/* rating + developer */}
+          <div className="flex items-center justify-between mt-4 text-sm">
+
+            <div className="flex items-center gap-1 text-cyan-400">
               <FaStar />
-              <span className="text-black font-bold">{game.ratings}</span>
+              <span className="text-white font-semibold">{game.ratings}</span>
             </div>
-            <span className="text-gray-600 text-xs">{game.developer}</span>
+
+            <span className="text-gray-500">{game.developer}</span>
           </div>
 
-          <div className="card-actions justify-end gap-2">
-            <span className="btn btn-primary btn-sm text-white w-full">
+          {/* button */}
+          <div className="mt-4">
+            <div className="w-full text-center px-4 py-2 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition hover:scale-[1.02] shadow-lg shadow-cyan-500/20">
               View Details
-            </span>
+            </div>
           </div>
+
         </div>
       </Link>
     </motion.div>

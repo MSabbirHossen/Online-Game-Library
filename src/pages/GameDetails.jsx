@@ -7,7 +7,6 @@ import {
   FaDownload,
   FaUser,
   FaCalendar,
-  // FaHardDrive, // Commented out to avoid confusion with FaHdd, which is more appropriate for file size
   FaHdd,
   FaGlobe,
   FaArrowLeft,
@@ -21,20 +20,16 @@ const GameDetails = () => {
 
   if (!game) {
     return (
-      <div className="min-h-screen bg-dark flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center"
-        >
-          <h1 className="text-3xl font-bold text-white mb-4">Game Not Found</h1>
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-4">Game Not Found</h1>
           <button
             onClick={() => navigate("/explore")}
-            className="btn btn-primary text-white"
+            className="px-6 py-3 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
           >
             Back to Games
           </button>
-        </motion.div>
+        </div>
       </div>
     );
   }
@@ -45,180 +40,154 @@ const GameDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-dark py-8 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Back Button */}
+    <section className="relative min-h-screen py-16 overflow-hidden bg-gray-900">
+
+      {/* background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
+
+      {/* glow */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-cyan-500/10 blur-[120px]"></div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-500/10 blur-[120px]"></div>
+
+      {/* grid */}
+      <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4">
+
+        {/* Back */}
         <motion.button
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-accent hover:text-primary transition mb-6"
+          className="flex items-center gap-2 text-gray-400 hover:text-cyan-300 mb-8 transition"
         >
-          <FaArrowLeft />
-          Go Back
+          <FaArrowLeft /> Go Back
         </motion.button>
 
-        {/* Main Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-        >
-          {/* Cover Image */}
-          <div className="lg:col-span-1">
+        {/* Main */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+          {/* LEFT */}
+          <div>
             <motion.img
               whileHover={{ scale: 1.05 }}
               src={game.coverPhoto}
               alt={game.title}
-              className="w-full rounded-2xl shadow-2xl shadow-primary"
+              className="w-full rounded-xl shadow-lg shadow-cyan-500/20"
             />
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleDownload}
-              className="btn btn-primary w-full mt-6 text-white font-bold"
+              className="w-full mt-6 flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/20"
             >
-              <FaDownload />
-              Download Game
+              <FaDownload /> Download Game
             </motion.button>
           </div>
 
-          {/* Game Info */}
+          {/* RIGHT */}
           <div className="lg:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                {game.title}
-              </h1>
 
-              {/* Rating and Category */}
-              <div className="flex flex-wrap gap-4 mb-6">
-                <div className="badge badge-primary text-white">
-                  {game.category}
-                </div>
-                <div className="flex items-center gap-2 bg-accent bg-opacity-20 px-4 py-2 rounded-lg">
-                  <FaStar className="text-accent" />
-                  <span className="text-white font-bold text-lg">
-                    {game.ratings}/5
-                  </span>
-                </div>
-              </div>
+            {/* title */}
+            <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
+              {game.title}
+            </h1>
 
-              {/* Description */}
-              <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-                {game.description}
-              </p>
+            {/* tags */}
+            <div className="flex flex-wrap gap-3 mb-6">
+              <span className="px-3 py-1 rounded-full bg-cyan-500 text-black text-sm font-bold">
+                {game.category}
+              </span>
 
-              {/* Game Specs */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-base-200 p-4 rounded-lg">
-                  <div className="flex items-center gap-3 mb-2">
-                    <FaUser className="text-primary" size={20} />
-                    <span className="text-gray-400">Developer</span>
-                  </div>
-                  <p className="text-white text-lg font-bold">
-                    {game.developer}
-                  </p>
-                </div>
+              <span className="flex items-center gap-1 text-cyan-400">
+                <FaStar />
+                <span className="text-white font-semibold">
+                  {game.ratings}/5
+                </span>
+              </span>
+            </div>
 
-                <div className="bg-base-200 p-4 rounded-lg">
-                  <div className="flex items-center gap-3 mb-2">
-                    <FaCalendar className="text-primary" size={20} />
-                    <span className="text-gray-400">Release Date</span>
-                  </div>
-                  <p className="text-white text-lg font-bold">
-                    {new Date(game.releaseDate).toLocaleDateString()}
-                  </p>
-                </div>
+            {/* description */}
+            <p className="text-gray-400 text-lg mb-10 leading-relaxed">
+              {game.description}
+            </p>
 
-                <div className="bg-base-200 p-4 rounded-lg">
-                  <div className="flex items-center gap-3 mb-2">
-                    <FaHdd className="text-primary" size={20} />
-                    <span className="text-gray-400">File Size</span>
-                  </div>
-                  <p className="text-white text-lg font-bold">
-                    {game.fileSize}
-                  </p>
-                </div>
+            {/* specs */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <div className="bg-base-200 p-4 rounded-lg">
-                  <div className="flex items-center gap-3 mb-2">
-                    <FaGlobe className="text-primary" size={20} />
-                    <span className="text-gray-400">Language</span>
-                  </div>
-                  <p className="text-white text-lg font-bold">
-                    {game.language}
-                  </p>
-                </div>
-              </div>
+              <Spec icon={<FaUser />} label="Developer" value={game.developer} />
+              <Spec icon={<FaCalendar />} label="Release" value={new Date(game.releaseDate).toLocaleDateString()} />
+              <Spec icon={<FaHdd />} label="File Size" value={game.fileSize} />
+              <Spec icon={<FaGlobe />} label="Language" value={game.language} />
 
-              {/* System Requirements */}
-              <div className="bg-gradient-to-r from-secondary to-dark border border-primary border-opacity-30 p-6 rounded-lg">
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  System Requirements
-                </h3>
-                <p className="text-gray-300 text-lg">
-                  {game.systemRequirements}
-                </p>
-              </div>
-            </motion.div>
+            </div>
+
+            {/* system requirements */}
+            <div className="mt-10 p-6 rounded-xl bg-black/40 border border-gray-700 backdrop-blur-md">
+              <h3 className="text-xl font-bold text-cyan-400 mb-3">
+                System Requirements
+              </h3>
+              <p className="text-gray-400">{game.systemRequirements}</p>
+            </div>
+
           </div>
-        </motion.div>
+        </div>
 
-        {/* Related Games Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-16"
-        >
-          <h2 className="text-3xl font-bold text-white mb-8">Similar Games</h2>
+        {/* Related */}
+        <div className="mt-20">
+          <h2 className="text-2xl font-bold text-white mb-6">
+            Similar Games
+          </h2>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {gamesData
               .filter((g) => g.category === game.category && g.id !== game.id)
               .slice(0, 3)
-              .map((relatedGame) => (
+              .map((related) => (
                 <motion.div
-                  key={relatedGame.id}
-                  whileHover={{ y: -5 }}
-                  onClick={() => navigate(`/game/${relatedGame.id}`)}
-                  className="cursor-pointer"
+                  key={related.id}
+                  whileHover={{ scale: 1.03 }}
+                  onClick={() => navigate(`/game/${related.id}`)}
+                  className="cursor-pointer bg-black/40 border border-gray-700 rounded-xl overflow-hidden hover:border-cyan-400 transition"
                 >
-                  <div className="card bg-base-200 shadow-lg hover:shadow-2xl hover:shadow-primary transition">
-                    <figure>
-                      <img
-                        src={relatedGame.coverPhoto}
-                        alt={relatedGame.title}
-                        className="w-full h-40 object-cover"
-                      />
-                    </figure>
-                    <div className="card-body">
-                      <h3 className="card-title text-white text-sm truncate">
-                        {relatedGame.title}
-                      </h3>
-                      <div className="flex items-center justify-between">
-                        <span className="badge badge-primary text-white">
-                          {relatedGame.category}
-                        </span>
-                        <div className="flex items-center gap-1 text-accent">
-                          <FaStar size={16} />
-                          <span>{relatedGame.ratings}</span>
-                        </div>
-                      </div>
+                  <img
+                    src={related.coverPhoto}
+                    className="h-40 w-full object-cover"
+                  />
+
+                  <div className="p-4">
+                    <h3 className="text-white font-semibold truncate">
+                      {related.title}
+                    </h3>
+
+                    <div className="flex justify-between mt-3 text-sm">
+                      <span className="text-cyan-400">
+                        {related.category}
+                      </span>
+                      <span className="text-gray-400">
+                        ⭐ {related.ratings}
+                      </span>
                     </div>
                   </div>
                 </motion.div>
               ))}
           </div>
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
+
+/* small reusable component */
+const Spec = ({ icon, label, value }) => (
+  <div className="p-4 rounded-xl bg-black/40 border border-gray-700 backdrop-blur-md hover:border-cyan-400 transition">
+    <div className="flex items-center gap-2 text-cyan-400 mb-2">
+      {icon}
+      <span className="text-gray-400">{label}</span>
+    </div>
+    <p className="text-white font-semibold">{value}</p>
+  </div>
+);
 
 export default GameDetails;
