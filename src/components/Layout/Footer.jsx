@@ -59,7 +59,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <FaGamepad className="text-cyan-400 text-2xl" />
-              <span className="text-2xl font-black">Gamehub</span>
+              <span className="text-2xl font-black">GameHub</span>
             </div>
 
             <p className="text-gray-400 text-sm leading-relaxed">
@@ -129,7 +129,7 @@ const Footer = () => {
         <div className="mt-14 pt-6 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
 
           <p>
-            © {new Date().getFullYear()} Gamehub. All rights reserved.
+            © {new Date().getFullYear()} GameHub. All rights reserved.
           </p>
 
           <p>

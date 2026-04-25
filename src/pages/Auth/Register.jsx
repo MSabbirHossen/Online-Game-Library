@@ -20,12 +20,18 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasLowercase = /[a-z]/.test(password);
+  const hasMinLength = password.length >= 6;
+
+  const rules = [
+    { label: "Must contain uppercase letter", valid: hasUppercase },
+    { label: "Must contain lowercase letter", valid: hasLowercase },
+    { label: "Minimum 6 characters", valid: hasMinLength },
+  ];
+
   const validatePassword = (pwd) => {
-    return (
-      /[A-Z]/.test(pwd) &&
-      /[a-z]/.test(pwd) &&
-      pwd.length >= 6
-    );
+    return /[A-Z]/.test(pwd) && /[a-z]/.test(pwd) && pwd.length >= 6;
   };
 
   const handleRegister = async (e) => {
@@ -33,6 +39,11 @@ const Register = () => {
 
     if (!validatePassword(password)) {
       toast.error("Password must include uppercase, lowercase, and 6+ chars");
+      return;
+    }
+    // Optional: Add more validations (email format, password strength, etc.)
+    if (!email.includes("@")) {
+      toast.error("Please enter a valid email");
       return;
     }
 
@@ -47,7 +58,7 @@ const Register = () => {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
 
       await updateProfile(userCredential.user, {
@@ -80,7 +91,6 @@ const Register = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
-
       {/* background */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
 
@@ -97,11 +107,9 @@ const Register = () => {
         animate={{ opacity: 1, y: 0 }}
         className="relative z-10 w-full max-w-md p-8 rounded-2xl bg-black/40 border border-gray-700 backdrop-blur-md shadow-lg shadow-cyan-500/10"
       >
-
         {/* title */}
         <h1 className="text-3xl font-black text-white text-center">
-          Join{" "}
-          <span className="text-cyan-400">GameHub</span>
+          Join <span className="text-cyan-400">GameHub</span>
         </h1>
 
         <p className="text-gray-400 text-center mt-2 mb-8">
@@ -110,12 +118,57 @@ const Register = () => {
 
         {/* form */}
         <form onSubmit={handleRegister} className="space-y-4">
-
-          <Input icon={<FaUser />} value={name} setValue={setName} placeholder="Full Name" />
-          <Input icon={<FaEnvelope />} value={email} setValue={setEmail} placeholder="Email" type="email" />
-          <Input icon={<FaImage />} value={photoURL} setValue={setPhotoURL} placeholder="Photo URL (optional)" type="url" />
-          <Input icon={<FaLock />} value={password} setValue={setPassword} placeholder="Password" type="password" />
-          <Input icon={<FaLock />} value={confirmPassword} setValue={setConfirmPassword} placeholder="Confirm Password" type="password" />
+          <Input
+            icon={<FaUser />}
+            value={name}
+            setValue={setName}
+            placeholder="Full Name"
+          />
+          <Input
+            icon={<FaEnvelope />}
+            value={email}
+            setValue={setEmail}
+            placeholder="Email"
+            type="email"
+          />
+          <Input
+            icon={<FaImage />}
+            value={photoURL}
+            setValue={setPhotoURL}
+            placeholder="Photo URL (optional)"
+            type="url"
+          />
+          <Input
+            icon={<FaLock />}
+            value={password}
+            setValue={setPassword}
+            placeholder="Password"
+            type="password"
+          />
+          {/* Rules */}
+          <div className="space-y-3">
+            {rules.map((rule, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className={`flex items-center gap-2 text-sm font-medium ${
+                  rule.valid ? "text-green-400" : "text-red-400"
+                }`}
+              >
+                <span className="text-lg">{rule.valid ? "✔" : "✖"}</span>
+                {rule.label}
+              </motion.div>
+            ))}
+          </div>
+          <Input
+            icon={<FaLock />}
+            value={confirmPassword}
+            setValue={setConfirmPassword}
+            placeholder="Confirm Password"
+            type="password"
+          />
 
           <button
             type="submit"
@@ -127,9 +180,7 @@ const Register = () => {
         </form>
 
         {/* divider */}
-        <div className="my-6 text-center text-gray-500 text-sm">
-          OR
-        </div>
+        <div className="my-6 text-center text-gray-500 text-sm">OR</div>
 
         {/* google */}
         <button
@@ -144,7 +195,10 @@ const Register = () => {
         {/* login */}
         <p className="text-center text-gray-500 mt-6 text-sm">
           Already have an account?{" "}
-          <Link to="/login" className="text-cyan-400 font-semibold hover:text-cyan-300">
+          <Link
+            to="/login"
+            className="text-cyan-400 font-semibold hover:text-cyan-300"
+          >
             Login
           </Link>
         </p>
