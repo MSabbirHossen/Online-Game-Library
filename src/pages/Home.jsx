@@ -6,6 +6,7 @@ import GameCard from "../components/GameCard";
 import gamesData from "../data/games.json";
 import { FaArrowRight, FaEnvelope, FaBell } from "react-icons/fa";
 import { toast } from "react-toastify";
+import CtA from "../components/CtA/CtA";
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -224,27 +225,8 @@ const Home = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 px-4 md:px-8 bg-dark text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Explore More?
-          </h2>
-          <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-            Join thousands of gamers discovering amazing indie games. Download
-            your favorites and support independent developers today.
-          </p>
-          <Link
-            to="/explore"
-            className="btn btn-primary btn-lg text-white hover:scale-105 transition"
-          >
-            Start Exploring <FaArrowRight />
-          </Link>
-        </motion.div>
+      <section className="py-16 px-4 md:px-8 bg-base text-center">
+        <CtA/>
       </section>
     </div>
   );
