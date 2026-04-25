@@ -5,10 +5,11 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { auth } from "../../firebase.config";
+// import { auth } from "../../firebase.config";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { FaGoogle, FaEnvelope, FaLock } from "react-icons/fa";
+import { auth } from "../../firebase.config";
 
 const Login = () => {
   const [email, setEmail] = useState("");
