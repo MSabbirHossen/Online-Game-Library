@@ -47,6 +47,7 @@ const Login = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+      <title>Login - GameHub</title>
 
       {/* background */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>

@@ -44,6 +44,7 @@ const ForgotPassword = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
+      <title>Forgot Password - GameHub</title>
 
       {/* background */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>

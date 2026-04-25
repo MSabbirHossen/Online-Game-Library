@@ -41,6 +41,7 @@ const GameDetails = () => {
 
   return (
     <section className="relative min-h-screen py-16 overflow-hidden bg-gray-900">
+      <title>Game Details - GameHub</title>
       {/* background */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
 

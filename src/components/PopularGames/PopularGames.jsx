@@ -10,14 +10,16 @@ const PopularGames = () => {
 
   useEffect(() => {
     const sortedGames = [...gamesData].sort(
-      (a, b) => parseFloat(b.ratings) - parseFloat(a.ratings)
+      (a, b) => parseFloat(b.ratings) - parseFloat(a.ratings),
     );
     setGames(sortedGames.slice(0, 3));
   }, []);
 
   return (
-    <section id="popular" className="relative py-20 overflow-hidden bg-gray-900">
-
+    <section
+      id="popular"
+      className="relative py-20 overflow-hidden bg-gray-900"
+    >
       {/* background */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
 
@@ -29,7 +31,6 @@ const PopularGames = () => {
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4">
-
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,8 +40,7 @@ const PopularGames = () => {
           className="text-center mb-14"
         >
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4">
-            Popular{" "}
-            <span className="text-cyan-400">Games</span>
+            Popular <span className="text-cyan-400">Games</span>
           </h2>
 
           <p className="text-gray-400 text-lg">

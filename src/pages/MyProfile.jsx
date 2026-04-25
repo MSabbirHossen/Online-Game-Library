@@ -2,7 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { motion } from "framer-motion";
-import { FaUser, FaEnvelope, FaEdit, FaSignOutAlt, FaShieldAlt } from "react-icons/fa";
+import {
+  FaUser,
+  FaEnvelope,
+  FaEdit,
+  FaSignOutAlt,
+  FaShieldAlt,
+} from "react-icons/fa";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase.config";
 import { toast } from "react-toastify";
@@ -23,7 +29,8 @@ const MyProfile = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden py-26">
-
+      <title>My Profile - GameHub</title>
+      
       {/* background */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
 
@@ -40,7 +47,6 @@ const MyProfile = () => {
         animate={{ opacity: 1, y: 0 }}
         className="relative z-10 w-full max-w-2xl p-8 rounded-2xl bg-black/40 border border-gray-700 backdrop-blur-md shadow-lg shadow-cyan-500/10"
       >
-
         {/* header */}
         <div className="text-center mb-8">
           <FaShieldAlt className="text-cyan-400 text-3xl mx-auto mb-3" />
@@ -67,9 +73,16 @@ const MyProfile = () => {
 
         {/* info */}
         <div className="space-y-5">
-
-          <ProfileField icon={<FaUser />} label="Full Name" value={user?.displayName || "Not set"} />
-          <ProfileField icon={<FaEnvelope />} label="Email" value={user?.email || "Not set"} />
+          <ProfileField
+            icon={<FaUser />}
+            label="Full Name"
+            value={user?.displayName || "Not set"}
+          />
+          <ProfileField
+            icon={<FaEnvelope />}
+            label="Email"
+            value={user?.email || "Not set"}
+          />
 
           <div className="p-4 rounded-xl bg-black/30 border border-gray-700">
             <p className="text-gray-400 text-sm">Member Since</p>
@@ -83,7 +96,6 @@ const MyProfile = () => {
 
         {/* actions */}
         <div className="mt-8 space-y-3">
-
           <button
             onClick={() => navigate("/update-profile")}
             className="w-full py-3 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition flex items-center justify-center gap-2"
@@ -101,7 +113,6 @@ const MyProfile = () => {
 
         {/* footer stats */}
         <div className="mt-10 grid grid-cols-2 gap-4">
-
           <div className="p-4 rounded-xl bg-black/30 border border-gray-700 text-center">
             <p className="text-cyan-400 font-bold">Active</p>
             <p className="text-gray-400 text-sm">Account Status</p>
@@ -111,7 +122,6 @@ const MyProfile = () => {
             <p className="text-cyan-400 font-bold">Verified</p>
             <p className="text-gray-400 text-sm">Security Level</p>
           </div>
-
         </div>
       </motion.div>
     </section>

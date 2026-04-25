@@ -19,31 +19,7 @@ import PopularGames from "./components/PopularGames/PopularGames";
 function AppContent() {
   const location = useLocation();
 
-  useEffect(() => {
-    // Update page title based on current route
-    const getTitleFromPath = (path) => {
-      const pathMap = {
-        "/": "Gamehub - Discover Indie Games",
-        "/login": "Login - Gamehub",
-        "/register": "Register - Gamehub",
-        "/forgot-password": "Forgot Password - Gamehub",
-        "/my-profile": "My Profile - Gamehub",
-        "/update-profile": "Update Profile - Gamehub",
-        "/explore": "Explore Games - Gamehub",
-      };
-
-      for (const [route, title] of Object.entries(pathMap)) {
-        if (path.startsWith(route)) {
-          return title;
-        }
-      }
-      return "Gamehub - Discover Indie Games";
-    };
-
-    document.title = getTitleFromPath(location.pathname);
-  }, [location]);
-
-  return (
+return (
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
