@@ -25,7 +25,7 @@ const Banner = () => {
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
       {/* Content */}
-      <div className="relative z-10 flex items-center justify-center h-full px-4 text-center">
+      <div className="relative z-10 flex items-center justify-center h-full px-3 sm:px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -33,31 +33,31 @@ const Banner = () => {
           className="max-w-3xl"
         >
           {/* Heading */}
-          <p className="text-lg md:text-2xl font-bold text-gray-300 mb-4">
+          <p className="text-sm sm:text-lg md:text-2xl font-bold text-gray-300 mb-3 sm:mb-4">
             Welcome to the
           </p>
-          <h1 className="text-4xl md:text-6xl font-black mb-6 text-white leading-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-6 text-white leading-tight">
             <span className="text-cyan-400">Online Game Library</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-gray-300 mb-10">
+          <p className="text-sm sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-10">
             Discover and support indie developers. Explore new worlds, trending
             games, and hidden gems.
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-col md:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Link
               to="/explore"
-              className="px-8 py-3 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition hover:scale-105 shadow-lg shadow-cyan-500/30 flex items-center justify-center gap-2"
+              className="px-6 sm:px-8 py-3 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition hover:scale-105 shadow-lg shadow-cyan-500/30 flex items-center justify-center gap-2 text-sm sm:text-base"
             >
               Explore Games <FaArrowRight />
             </Link>
 
             <a
               href="#popular"
-              className="px-8 py-3 rounded-lg border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black transition hover:scale-105"
+              className="px-6 sm:px-8 py-3 rounded-lg border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black transition hover:scale-105 text-sm sm:text-base"
             >
               View Popular Games
             </a>

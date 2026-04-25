@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900 px-4 sm:px-6 py-12 sm:py-0">
       <title>Login - GameHub</title>
 
       {/* background */}
@@ -63,16 +63,16 @@ const Login = () => {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 w-full max-w-md p-8 rounded-2xl bg-black/40 border border-gray-700 backdrop-blur-md shadow-lg shadow-cyan-500/10"
+        className="relative z-10 w-full max-w-md p-6 sm:p-8 rounded-2xl bg-black/40 border border-gray-700 backdrop-blur-md shadow-lg shadow-cyan-500/10"
       >
 
         {/* heading */}
-        <h1 className="text-3xl font-black text-white text-center mb-2">
+        <h1 className="text-2xl sm:text-3xl font-black text-white text-center mb-2">
           Welcome{" "}
           <span className="text-cyan-400">Back</span>
         </h1>
 
-        <p className="text-gray-400 text-center mb-8">
+        <p className="text-gray-400 text-center mb-6 sm:mb-8 text-sm sm:text-base">
           Sign in to continue your gaming journey
         </p>
 

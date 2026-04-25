@@ -32,7 +32,7 @@ const Newsletter = () => {
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
       {/* content */}
-      <div className="relative z-10 max-w-3xl mx-auto px-4">
+      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6">
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -43,37 +43,37 @@ const Newsletter = () => {
         >
 
           {/* icon */}
-          <div className="flex justify-center mb-6">
-            <div className="p-4 rounded-full bg-cyan-500/10 border border-cyan-400/30">
-              <FaBell className="text-cyan-400 text-3xl" />
+          <div className="flex justify-center mb-4 sm:mb-6">
+            <div className="p-3 sm:p-4 rounded-full bg-cyan-500/10 border border-cyan-400/30">
+              <FaBell className="text-cyan-400 text-2xl sm:text-3xl" />
             </div>
           </div>
 
           {/* heading */}
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-3 sm:mb-4">
             Stay in the{" "}
             <span className="text-cyan-400">Game</span>
           </h2>
 
           {/* subtitle */}
-          <p className="text-gray-300 text-lg mb-10">
+          <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-10">
             Get updates on new releases, trending games, and exclusive developer news.
           </p>
 
           {/* form */}
           <form
             onSubmit={handleNewsletterSubmit}
-            className="flex flex-col md:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4"
           >
             {/* input */}
             <div className="flex-1 relative">
-              <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400" />
+              <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 text-sm sm:text-base" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full pl-12 pr-4 py-3 rounded-lg bg-black/40 border border-gray-700 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
+                className="w-full pl-10 sm:pl-12 pr-4 py-3 rounded-lg bg-black/40 border border-gray-700 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition text-sm sm:text-base"
                 required
               />
             </div>

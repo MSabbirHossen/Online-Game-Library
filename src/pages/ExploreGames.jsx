@@ -38,20 +38,20 @@ const ExploreGames = () => {
       {/* grid */}
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-14"
+          className="text-center mb-10 sm:mb-14"
         >
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-4">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-black text-white mb-3 sm:mb-4">
             Explore{" "}
             <span className="text-cyan-400">Games</span>
           </h1>
 
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-400 text-sm sm:text-lg">
             Discover trending indie games and AAA titles in one place
           </p>
         </motion.div>
@@ -60,17 +60,17 @@ const ExploreGames = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10"
+          className="mb-8 sm:mb-10"
         >
           <div className="flex items-center bg-black/40 border border-gray-700 rounded-lg overflow-hidden backdrop-blur-md">
-            <span className="px-4 text-cyan-400">
-              <FaSearch />
+            <span className="px-3 sm:px-4 text-cyan-400">
+              <FaSearch size={16} className="sm:w-5 sm:h-5" />
             </span>
 
             <input
               type="text"
               placeholder="Search games, developers..."
-              className="w-full py-3 px-2 bg-transparent text-gray-200 placeholder-gray-500 focus:outline-none"
+              className="w-full py-2 sm:py-3 px-2 sm:px-2 bg-transparent text-gray-200 placeholder-gray-500 focus:outline-none text-sm sm:text-base"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -78,19 +78,19 @@ const ExploreGames = () => {
         </motion.div>
 
         {/* Filters */}
-        <motion.div className="mb-12">
+        <motion.div className="mb-10 sm:mb-12">
           <div className="flex items-center gap-2 mb-4">
-            <FaFilter className="text-cyan-400" />
-            <h3 className="text-xl font-bold text-white">Categories</h3>
+            <FaFilter className="text-cyan-400 text-sm sm:text-base" />
+            <h3 className="text-base sm:text-xl font-bold text-white">Categories</h3>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {categories.map((category) => (
               <motion.button
                 key={category}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg border transition text-sm font-semibold ${
+                className={`px-3 sm:px-4 py-2 rounded-lg border transition text-xs sm:text-sm font-semibold ${
                   selectedCategory === category
                     ? "bg-cyan-500 text-black border-cyan-400"
                     : "bg-black/30 text-gray-300 border-gray-700 hover:border-cyan-400 hover:text-cyan-300"
@@ -103,7 +103,7 @@ const ExploreGames = () => {
         </motion.div>
 
         {/* Results */}
-        <div className="mb-6 text-gray-400">
+        <div className="mb-6 text-gray-400 text-sm sm:text-base">
           Showing{" "}
           <span className="text-cyan-400 font-bold">
             {filteredGames.length}
@@ -113,7 +113,7 @@ const ExploreGames = () => {
 
         {/* Grid */}
         {filteredGames.length > 0 ? (
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {filteredGames.map((game) => (
               <motion.div
                 key={game.id}

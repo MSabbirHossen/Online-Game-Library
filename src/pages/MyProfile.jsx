@@ -28,7 +28,7 @@ const MyProfile = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden py-26">
+    <section className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden py-12 sm:py-20 px-4 sm:px-6">
       <title>My Profile - GameHub</title>
       
       {/* background */}
@@ -45,24 +45,24 @@ const MyProfile = () => {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 w-full max-w-2xl p-8 rounded-2xl bg-black/40 border border-gray-700 backdrop-blur-md shadow-lg shadow-cyan-500/10"
+        className="relative z-10 w-full max-w-2xl p-6 sm:p-8 rounded-2xl bg-black/40 border border-gray-700 backdrop-blur-md shadow-lg shadow-cyan-500/10"
       >
         {/* header */}
-        <div className="text-center mb-8">
-          <FaShieldAlt className="text-cyan-400 text-3xl mx-auto mb-3" />
+        <div className="text-center mb-6 sm:mb-8">
+          <FaShieldAlt className="text-cyan-400 text-2xl sm:text-3xl mx-auto mb-2 sm:mb-3" />
 
-          <h1 className="text-4xl font-black text-white">
+          <h1 className="text-2xl sm:text-4xl font-black text-white">
             My <span className="text-cyan-400">Profile</span>
           </h1>
 
-          <p className="text-gray-400 text-sm mt-2">
+          <p className="text-gray-400 text-xs sm:text-sm mt-2">
             Secure identity dashboard
           </p>
         </div>
 
         {/* avatar */}
-        <div className="flex justify-center mb-8">
-          <div className="w-28 h-28 rounded-full border-2 border-cyan-400 overflow-hidden bg-black/30 flex items-center justify-center text-cyan-400 text-3xl font-bold shadow-lg shadow-cyan-500/20">
+        <div className="flex justify-center mb-6 sm:mb-8">
+          <div className="w-20 sm:w-28 h-20 sm:h-28 rounded-full border-2 border-cyan-400 overflow-hidden bg-black/30 flex items-center justify-center text-cyan-400 text-2xl sm:text-3xl font-bold shadow-lg shadow-cyan-500/20">
             {user?.photoURL ? (
               <img src={user.photoURL} alt="profile" />
             ) : (

@@ -52,19 +52,19 @@ const GameDetails = () => {
       {/* grid */}
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         {/* Back */}
         <motion.button
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-400 hover:text-cyan-300 mb-8 transition"
+          className="flex items-center gap-2 text-gray-400 hover:text-cyan-300 mb-6 sm:mb-8 transition text-sm sm:text-base"
         >
           <FaArrowLeft /> Go Back
         </motion.button>
 
         {/* Main */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
           {/* LEFT */}
           <div>
             <motion.img

@@ -50,19 +50,19 @@ const Footer = () => {
       {/* grid */}
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00ffff22_1px,transparent_1px),linear-gradient(to_bottom,#00ffff22_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
 
         {/* top section */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
 
           {/* brand */}
-          <div>
+          <div className="col-span-1 sm:col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <FaGamepad className="text-cyan-400 text-2xl" />
-              <span className="text-2xl font-black">GameHub</span>
+              <FaGamepad className="text-cyan-400 text-xl sm:text-2xl" />
+              <span className="text-xl sm:text-2xl font-black">GameHub</span>
             </div>
 
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
               Discover and support indie game developers. Your gateway to
               trending, indie, and AAA gaming experiences.
             </p>
@@ -70,11 +70,11 @@ const Footer = () => {
 
           {/* quick links */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-cyan-400">
+            <h3 className="text-base sm:text-lg font-bold mb-4 text-cyan-400">
               Quick Links
             </h3>
 
-            <div className="flex flex-col gap-2 text-gray-400">
+            <div className="flex flex-col gap-2 text-gray-400 text-xs sm:text-sm">
               <Link className="hover:text-cyan-300 transition" to="/">
                 Home
               </Link>
@@ -86,7 +86,7 @@ const Footer = () => {
 
           {/* support */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-cyan-400">
+            <h3 className="text-base sm:text-lg font-bold mb-4 text-cyan-400">
               Support
             </h3>
 
