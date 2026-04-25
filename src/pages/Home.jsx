@@ -2,44 +2,36 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import GameCard from "../components/GameCard";
-import gamesData from "../data/games.json";
 import { FaArrowRight, FaEnvelope, FaBell } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Newsletter from "../components/Newsletter/Newsletter";
 import CTA from "../components/CtA/CtA";
 import Developers from "../components/Developers/Developers";
+import PopularGames from "../components/PopularGames/PopularGames";
 
 const Home = () => {
   
-  const [games, setGames] = useState([]);
+  // const [games, setGames] = useState([]);
 
-  useEffect(() => {
-    // Sort games by rating
-    const sortedGames = [...gamesData].sort(
-      (a, b) => parseFloat(b.ratings) - parseFloat(a.ratings),
-    );
-    setGames(sortedGames.slice(0, 6));
-  }, []);
+  // useEffect(() => {
+  //   // Sort games by rating
+  //   const sortedGames = [...gamesData].sort(
+  //     (a, b) => parseFloat(b.ratings) - parseFloat(a.ratings),
+  //   );
+  //   setGames(sortedGames.slice(0, 6));
+  // }, []);
 
 
 
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
 
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-    },
-  };
+
+  // const item = {
+  //   hidden: { opacity: 0, y: 20 },
+  //   visible: {
+  //     opacity: 1,
+  //     y: 0,
+  //   },
+  // };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -98,46 +90,7 @@ const Home = () => {
 
       {/* Popular Games Section */}
       <section id="popular" className="py-16 px-4 md:px-8 bg-dark">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Popular Games
-              </h2>
-              <p className="text-gray-400 text-lg">
-                Check out the top-rated games from our collection
-              </p>
-            </div>
-
-            <motion.div
-              variants={container}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {games.map((game) => (
-                <motion.div key={game.id} variants={item}>
-                  <GameCard game={game} />
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <div className="text-center mt-12">
-              <Link
-                to="/explore"
-                className="btn btn-primary btn-lg text-white hover:scale-105 transition"
-              >
-                View All Games <FaArrowRight />
-              </Link>
-            </div>
-          </div>
-        </motion.div>
+      <PopularGames/>
       </section>
 
       {/* Featured Developers Marquee */}
