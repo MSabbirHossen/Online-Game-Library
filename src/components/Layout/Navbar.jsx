@@ -23,14 +23,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar bg-gradient-to-r from-secondary to-dark shadow-xl sticky top-0 z-50">
+    <nav className="navbar bg-neutral-content shadow-xl sticky top-0 z-50">
       <div className="navbar-start">
         <Link
           to="/"
           className="flex items-center gap-2 text-xl font-bold text-primary hover:text-accent transition"
         >
           <FaGamepad size={28} />
-          <span className="hidden sm:inline">Gamehub</span>
+          <span className="hidden sm:inline">GameHub</span>
         </Link>
       </div>
 
@@ -38,13 +38,13 @@ const Navbar = () => {
         <div className="menu menu-horizontal px-1 gap-2">
           <Link
             to="/"
-            className="btn btn-ghost text-white hover:bg-primary hover:text-dark transition"
+            className="btn btn-ghost text-base-content hover:bg-neutral-content hover:text-dark transition"
           >
             Home
           </Link>
           <Link
             to="/explore"
-            className="btn btn-ghost text-white hover:bg-primary hover:text-dark transition"
+            className="btn btn-ghost text-base-content hover:bg-neutral-content hover:text-dark transition"
           >
             Explore
           </Link>
@@ -67,14 +67,14 @@ const Navbar = () => {
               </div>
             </button>
             {isMenuOpen && (
-              <ul className="dropdown-content menu bg-secondary rounded-box z-[1] w-52 p-2 shadow">
-                <li className="text-white mb-2">
+              <ul className="dropdown-content menu bg-white rounded-box z-[1] w-52 p-2 shadow">
+                <li className="text-base-content mb-2">
                   <span>{user?.displayName || user?.email}</span>
                 </li>
                 <li>
                   <Link
                     to="/my-profile"
-                    className="text-white hover:bg-primary hover:text-dark"
+                    className="text-base-content hover:outline hover:text-dark"
                   >
                     <FaUser /> My Profile
                   </Link>
@@ -82,7 +82,7 @@ const Navbar = () => {
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="text-white hover:bg-red-600 hover:text-white"
+                    className="text-base-content hover:bg-red-600 hover:text-white"
                   >
                     <FaSignOutAlt /> Logout
                   </button>
@@ -92,12 +92,12 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="gap-2 flex">
-            <Link to="/login" className="btn btn-primary text-white">
+            <Link to="/login" className="btn btn-outline btn-primary text-base-content hover:bg-primary hover:text-white transition">
               Login
             </Link>
             <Link
               to="/register"
-              className="btn btn-outline btn-primary text-primary hover:bg-primary"
+              className="btn btn-outline btn-primary text-base-content hover:bg-primary hover:text-white transition"
             >
               Register
             </Link>
@@ -122,7 +122,7 @@ const Navbar = () => {
               />
             </svg>
           </button>
-          <ul className="dropdown-content menu bg-secondary rounded-box z-[1] w-52 p-2 shadow text-white">
+          <ul className="dropdown-content menu bg-neutral-content rounded-box z-[1] w-52 p-2 shadow text-base-content">
             <li>
               <Link to="/">Home</Link>
             </li>
