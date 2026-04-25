@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
@@ -25,29 +25,37 @@ const Navbar = () => {
   return (
     <nav className="navbar bg-neutral-content shadow-xl sticky top-0 z-50">
       <div className="navbar-start">
-        <Link
+        <NavLink
           to="/"
-          className="flex items-center gap-2 text-xl font-bold text-primary hover:text-accent transition"
+          className="flex items-center gap-2 text-xl font-bold text-primary hover:text-black transition"
         >
           <FaGamepad size={28} />
           <span className="hidden sm:inline">GameHub</span>
-        </Link>
+        </NavLink>
       </div>
 
       <div className="navbar-center hidden lg:flex">
         <div className="menu menu-horizontal px-1 gap-2">
-          <Link
+          <NavLink
             to="/"
-            className="btn btn-ghost text-base-content hover:bg-neutral-content hover:text-dark transition"
+            className={({ isActive }) =>
+              `btn btn-ghost text-base-content hover:outline-1 hover:text-black transition ${
+                isActive ? "bg-primary text-white" : ""
+              }`
+            }
           >
             Home
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/explore"
-            className="btn btn-ghost text-base-content hover:bg-neutral-content hover:text-dark transition"
+            className={({ isActive }) =>
+              `btn btn-ghost text-base-content hover:outline-1 hover:text-black transition ${
+                isActive ? "bg-primary text-white" : ""
+              }`
+            }
           >
             Explore
-          </Link>
+          </NavLink>
         </div>
       </div>
 
@@ -72,17 +80,17 @@ const Navbar = () => {
                   <span>{user?.displayName || user?.email}</span>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/my-profile"
-                    className="text-base-content hover:outline hover:text-dark"
+                    className="text-base-content hover:outline-1 hover:text-black transition w-full text-left"
                   >
                     <FaUser /> My Profile
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="text-base-content hover:bg-red-600 hover:text-white"
+                    className="text-base-content hover:bg-red-600 hover:text-white hover:outline-1 transition w-full text-left"
                   >
                     <FaSignOutAlt /> Logout
                   </button>
@@ -92,15 +100,24 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="gap-2 flex">
-            <Link to="/login" className="btn btn-outline btn-primary text-base-content hover:bg-primary hover:text-white transition">
+            <NavLink to="/login" className={({ isActive }) =>
+              `btn bg-neutral-content text-base-content hover:outline-1 hover:text-black transition ${
+                isActive ? "bg-primary text-white" : ""
+              }`
+            }>
               Login
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/register"
-              className="btn btn-outline btn-primary text-base-content hover:bg-primary hover:text-white transition"
+              className={({ isActive }) =>
+              `btn bg-neutral-content text-base-content hover:outline-1 hover:text-black transition ${
+                isActive ? "bg-primary text-white" : ""
+              }`
+            }
             >
               Register
-            </Link>
+            </NavLink>
+            
           </div>
         )}
 
@@ -124,10 +141,10 @@ const Navbar = () => {
           </button>
           <ul className="dropdown-content menu bg-neutral-content rounded-box z-[1] w-52 p-2 shadow text-base-content">
             <li>
-              <Link to="/">Home</Link>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <Link to="/explore">Explore</Link>
+              <NavLink to="/explore">Explore</NavLink>
             </li>
           </ul>
         </div>

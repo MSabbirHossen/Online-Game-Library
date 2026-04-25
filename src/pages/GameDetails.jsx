@@ -7,7 +7,8 @@ import {
   FaDownload,
   FaUser,
   FaCalendar,
-  FaHardDrive,
+  // FaHardDrive, // Commented out to avoid confusion with FaHdd, which is more appropriate for file size
+  FaHdd,
   FaGlobe,
   FaArrowLeft,
 } from "react-icons/fa";
@@ -136,7 +137,7 @@ const GameDetails = () => {
 
                 <div className="bg-base-200 p-4 rounded-lg">
                   <div className="flex items-center gap-3 mb-2">
-                    <FaHardDrive className="text-primary" size={20} />
+                    <FaHdd className="text-primary" size={20} />
                     <span className="text-gray-400">File Size</span>
                   </div>
                   <p className="text-white text-lg font-bold">
