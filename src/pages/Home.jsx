@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
-import Marquee from "react-fast-marquee";
 import { motion } from "framer-motion";
 import GameCard from "../components/GameCard";
 import gamesData from "../data/games.json";
@@ -8,6 +7,7 @@ import { FaArrowRight, FaEnvelope, FaBell } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Newsletter from "../components/Newsletter/Newsletter";
 import CTA from "../components/CtA/CtA";
+import Developers from "../components/Developers/Developers";
 
 const Home = () => {
   
@@ -42,7 +42,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-dark">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Banner / Slider */}
       <section className="relative h-96 md:h-screen bg-gradient-to-r from-secondary via-dark to-primary overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
@@ -141,31 +141,8 @@ const Home = () => {
       </section>
 
       {/* Featured Developers Marquee */}
-      <section className="py-12 bg-gradient-to-r from-secondary to-dark border-y border-primary border-opacity-30">
-        <div className="max-w-7xl mx-auto">
-          <h3 className="text-2xl font-bold text-white mb-6 text-center">
-            Featured Developers
-          </h3>
-          <Marquee gradient gradientColor="#1a1a1a" speed={40}>
-            <div className="flex gap-12 px-6">
-              {[
-                "Epic Games",
-                "Supercell",
-                "Krafton",
-                "HoYoverse",
-                "Innersloth",
-                "Mojang",
-                "Garena",
-              ].map((dev, idx) => (
-                <div key={idx} className="text-center">
-                  <div className="bg-primary bg-opacity-20 rounded-lg p-4 w-32 flex items-center justify-center">
-                    <span className="text-accent font-bold">{dev}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Marquee>
-        </div>
+      <section className="py-12 bg-gradient-to-l from-secondary-content to-gray-500 border-y border-primary border-opacity-30">
+        <Developers/>
       </section>
 
       {/* Newsletter Section */}
