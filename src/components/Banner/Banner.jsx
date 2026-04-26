@@ -4,8 +4,32 @@ import { Link } from "react-router";
 import { FaArrowRight } from "react-icons/fa";
 
 const Banner = () => {
+  const bannerGames = [
+    {
+      id: 1,
+      title: "Player Unknowns Battle Ground: PUBG",
+      image:
+        "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop",
+    },
+    {
+      id: 2,
+      title: "Fortnite Battle Royale",
+      image:
+        "https://images.unsplash.com/photo-1538481143235-5d980e966ff9?w=600&h=400&fit=crop",
+    },
+    {
+      id: 3,
+      title: "Call of Duty: Mobile",
+      image:
+        "https://images.unsplash.com/photo-1550355291-bbee04a92027?w=600&h=400&fit=crop",
+    },
+  ];
+
   return (
     <section className="relative h-[90vh] md:h-screen overflow-hidden bg-gray-900">
+      {/* Background
+      Banner will be a slider with minimum 3 slide which displays some game images */}
+
       {/* Base gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
 

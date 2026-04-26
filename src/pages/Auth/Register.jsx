@@ -161,6 +161,16 @@ const Register = () => {
                   rule.valid ? "text-green-400" : "text-red-400"
                 }`}
               >
+                {/* if the rule is valid, then the rule will disappear after a delay */}
+                {rule.valid && (
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    (Valid)
+                  </motion.span>
+                )}
                 <span className="text-lg">{rule.valid ? "✔" : "✖"}</span>
                 {rule.label}
               </motion.div>
