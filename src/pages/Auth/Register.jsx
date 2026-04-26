@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -19,6 +19,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const hasUppercase = /[A-Z]/.test(password);
   const hasLowercase = /[a-z]/.test(password);
@@ -67,7 +68,8 @@ const Register = () => {
       });
 
       toast.success("Account created successfully!");
-      navigate("/");
+      const from = location.state?.from || "/";
+      navigate(from);
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -81,7 +83,8 @@ const Register = () => {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       toast.success("Registered with Google!");
-      navigate("/");
+      const from = location.state?.from || "/";
+      navigate(from);
     } catch (error) {
       toast.error(error.message);
     } finally {

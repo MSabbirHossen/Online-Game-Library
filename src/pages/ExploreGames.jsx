@@ -3,10 +3,12 @@ import { motion } from "framer-motion";
 import GameCard from "../components/GameCard";
 import gamesData from "../data/games.json";
 import { FaSearch, FaFilter } from "react-icons/fa";
+import { useLocation } from "react-router";
 
 const ExploreGames = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const location = useLocation();
 
   const categories = ["All", ...new Set(gamesData.map((g) => g.category))];
 

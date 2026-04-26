@@ -15,11 +15,12 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ExploreGames from "./pages/ExploreGames";
 import PopularGames from "./components/PopularGames/PopularGames";
+import MeetDeveloper from "./pages/MeetDeveloper";
 
 function AppContent() {
   const location = useLocation();
 
-return (
+  return (
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
@@ -48,6 +49,14 @@ return (
           element={
             <ProtectedRoute>
               <UpdateProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/developers"
+          element={
+            <ProtectedRoute>
+              <MeetDeveloper />
             </ProtectedRoute>
           }
         />

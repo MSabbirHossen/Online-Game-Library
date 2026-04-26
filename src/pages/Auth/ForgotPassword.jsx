@@ -62,14 +62,16 @@ const ForgotPassword = () => {
         animate={{ opacity: 1, y: 0 }}
         className="relative z-10 w-full max-w-md p-8 rounded-2xl bg-black/40 border border-gray-700 backdrop-blur-md shadow-lg shadow-cyan-500/10"
       >
-
         {/* back */}
         <button
-          onClick={() => navigate("/login")}
-          className="flex items-center gap-2 text-gray-400 hover:text-cyan-300 mb-6 transition"
+          onClick={() => {
+            const from = location.state?.from || "/login";
+            navigate(from);
+          }}
+          className="flex items-center gap-2 text-gray-400 hover:text-cyan-300 mb-6 transition text-sm"
         >
           <FaArrowLeft />
-          Back to Login
+          Back
         </button>
 
         {/* icon */}
@@ -79,8 +81,7 @@ const ForgotPassword = () => {
 
         {/* title */}
         <h1 className="text-3xl font-black text-white text-center">
-          Password{" "}
-          <span className="text-cyan-400">Recovery</span>
+          Password <span className="text-cyan-400">Recovery</span>
         </h1>
 
         <p className="text-gray-400 text-center mt-2 mb-8">
@@ -89,7 +90,6 @@ const ForgotPassword = () => {
 
         {/* form */}
         <form onSubmit={handleResetPassword} className="space-y-5">
-
           {/* email */}
           <div className="flex items-center bg-black/30 border border-gray-700 rounded-lg focus-within:border-cyan-400 transition">
             <span className="px-3 text-cyan-400">
@@ -121,7 +121,6 @@ const ForgotPassword = () => {
           A secure reset link will be sent to your email. Follow the
           instructions to regain access to your account.
         </p>
-
       </motion.div>
     </section>
   );

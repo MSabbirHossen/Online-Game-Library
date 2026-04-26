@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import {
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -15,6 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,7 +24,8 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login successful!");
-      navigate("/");
+      const from = location.state?.from || "/";
+      navigate(from);
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -37,7 +39,8 @@ const Login = () => {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       toast.success("Logged in with Google!");
-      navigate("/");
+      const from = location.state?.from || "/";
+      navigate(from);
     } catch (error) {
       toast.error(error.message);
     } finally {
