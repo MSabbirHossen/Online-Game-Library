@@ -9,6 +9,11 @@ import {
 
 const SocialLinks = [
   {
+    name: "LinkedIn",
+    icon: <FaLinkedin />,
+    link: "https://www.linkedin.com/in/ms-hossen/",
+  },
+  {
     name: "Facebook",
     icon: <FaFacebook />,
     link: "https://www.facebook.com/parttimecoder/",
@@ -17,11 +22,6 @@ const SocialLinks = [
     name: "Instagram",
     icon: <FaInstagramSquare />,
     link: "https://www.instagram.com/parttimecoder/",
-  },
-  {
-    name: "LinkedIn",
-    icon: <FaLinkedin />,
-    link: "https://www.linkedin.com/in/parttimecoder/",
   },
   {
     name: "YouTube",
