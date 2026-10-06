@@ -6,13 +6,13 @@
 [![Vite](https://img.shields.io/badge/Vite-7.2.4-purple?logo=vite)](https://vite.dev)
 [![Firebase](https://img.shields.io/badge/Firebase-12.12.1-orange?logo=firebase)](https://firebase.google.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2.4-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
-[![License][def]](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ## Overview
 
 ### Screenshot
 
-![][./preview.jpg]
+![](preview.jpg)
 
 ### Links
 
@@ -606,7 +606,3 @@ For issues, questions, or suggestions:
 ---
 
 **Made with ❤️ by Sabbir Hossen**
-
-
-[./preview.jpg]: preview.jpg
-[def]: https://img.shields.io/badge/License-MIT-green
